@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nataly Lado | Communications Professional</title>
+    <style>
+        /* General Styling with NEW Navy/White Color Scheme */
+        :root {
+            --primary-color: #0A192F; /* Deep Navy Blue */
+            --secondary-color: #d4af37; /* Gold Accent */
+            --light-navy: #172A45;   /* Lighter Navy for sections */
+            --light-gray: #ccd6f6;    /* Light gray for text */
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--primary-color); /* Set main background */
+            color: var(--light-gray); /* Set default text color */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        h1, h2 {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: var(--white); /* Headings should be bright white */
+        }
+
+        section {
+            padding: 60px 0;
+            border-top: 1px solid var(--light-navy);
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--light-navy); /* Alternating section color */
+        }
+
+        /* Navigation Bar */
+        #navbar {
+            background: rgba(10, 25, 47, 0.85); /* Semi-transparent navy */
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        #navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: var(--light-gray);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-family: 'Helvetica Neue', sans-serif;
+            transition: color 0.3s;
+        }
+
+        #navbar a:hover,
+        #navbar a.active { /* Style for the active link */
+            color: var(--secondary-color);
+        }
+        
+        #navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        /* Header/Homepage */
+        #home {
+            background: none; /* Removed the image background to focus on color scheme */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-top: none;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            color: var(--white);
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            color: var(--light-gray);
+        }
+
+        /* Services Section */
+        #services .section-title, #placements .section-title, #reviews .section-title, #contact .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--light-navy);
+            padding: 30px;
+            text-align: center;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+        
+        .service-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        /* JS Animation Class */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* Placements Section */
+        .placements-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .placements-logos img {
+            max-height: 50px;
+            filter: grayscale(100%) brightness(150%); /* Adjusted for dark background */
+            opacity: 0.7;
+            transition: filter 0.3s, opacity 0.3s;
+        }
+
+        .placements-logos img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* Reviews Section */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .review-card {
+            background: var(--light-navy);
+            padding: 25px;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .review-card p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .review-card cite {
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        /* Contact Section */
+        #contact-form {
+            max-width: 700px;
+            margin: auto;
+        }
+        
+        .sr-only { /* For accessible form labels */
+          position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; 
+          overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            background-color: var(--primary-color); /* Dark input background */
+            color: var(--white); /* White input text */
+        }
+        
+        .form-group-names {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-group-names div {
+            flex: 1;
+        }
+
+        #contact-form button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        #contact-form button:hover {
+            background: #f7d46c;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--light-navy);
+            color: var(--light-gray);
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            #navbar .container {
+                flex-direction: column;
+            }
+            #navbar ul {
+                padding-top: 10px;
+            }
+            #home h1 {
+                font-size: 2.5rem;
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container">
+            <a href="#home" class="logo">Nataly Lado</a>
+            <ul class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#placements">Placements</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="scroll-section">
+        <div class="container">
+            <h1>Expert Communications. Inspired by Faith.</h1>
+            <p>I am a communications professional with experience in corporate communications and working in the broadcasting industry. I am currently a Catholic blogger covering the faith in the United States, the Vatican, and mission territories worldwide.</p>
+        </div>
+    </header>
+
+    <section id="services" class="scroll-section">
+        <div class="container">
+            <h2 class="section-title">My Services</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in-element">
+                    <h3>Crisis Communication</h3>
+                    <p>Navigating turbulence with precision. I develop and execute strategic crisis communication plans that protect your brand's integrity, mitigate damage, and restore public confidence, ensuring you emerge stronger from any challenge.</p>
+                </div>
+                <div class="service-card fade-in-element">
+                    <h3>Speech Writing</h3>
+                    <p>Crafting words that inspire action. From keynote addresses to intimate talks, I write compelling speeches that capture your unique voice, resonate with your audience, and drive your message home with clarity and impact.</p>
+                </div>
+                <div class="service-card fade-in-element">
+                    <h3>Communications Planning</h3>
+                    <p>Building roadmaps to success. I design comprehensive, multi-channel communication strategies that align with your organizational goals, engage key audiences, and deliver measurable results for your mission.</p>
+                </div>
+                <div class="service-card fade-in-element">
+                    <h3>Fundraising</h3>
+                    <p>Fueling your mission through powerful storytelling. I develop fundraising campaigns and materials that connect with donors emotionally, articulate your impact, and inspire generous support to achieve your financial goals.</p>
+                </div>
+                <div class="service-card fade-in-element">
+                    <h3>Event Planning</h3>
+                    <p>From concept to curtain call. I manage every detail to produce seamless, high-impact events that not only run flawlessly but also create unforgettable experiences for your guests and amplify your message.</p>
+                </div>
+                <div class="service-card fade-in-element">
+                    <h3>Marketing</h3>
+                    <p>Cutting through the noise. I create integrated marketing strategies that elevate your brand visibility, engage your target market, and convert interest into tangible growth, loyalty, and support for your cause.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="placements" class="scroll-section">
+        <div class="container">
+            <h2 class="section-title">As Seen On</h2>
+            <div class="placements-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/The_New_York_Times_logo.png" alt="The New York Times">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/CNN_International_logo.svg/1200px-CNN_International_logo.svg.png" alt="CNN">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/USA_Today_logo.svg/1280px-USA_Today_logo.svg.png" alt="USA Today">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vatican_News_logo.svg/2560px-Vatican_News_logo.svg.png" alt="Vatican News">
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="scroll-section">
+        <div class="container">
+            <h2 class="section-title">Client Reviews</h2>
+            <div class="reviews-grid">
+                <div class="review-card fade-in-element">
+                    <p>"Working with Nataly  was a transformative experience... resulting in a 40% increase in contributions. Their strategic approach and unwavering dedication are truly unparalleled."</p>
+                    <cite>— Executive Director, National Non-Profit</cite>
+                </div>
+                <div class="review-card fade-in-element">
+                    <p>"Nataly Lado is the professional you call when the stakes are highest... Their calm, strategic, and decisive leadership in crisis communication was the critical factor in navigating the storm successfully."</p>
+                    <cite>— CEO, Tech Corporation</cite>
+                </div>
+                <div class="review-card fade-in-element">
+                    <p>"In my years of ministry, I have rarely encountered a communications professional with such a nuanced understanding of faith-based messaging... Their work has been instrumental in communicating complex concepts."</p>
+                    <cite>— Bishop, Catholic Diocese</cite>
+                </div>
+                <div class="review-card fade-in-element">
+                    <p>"As a veteran in the broadcasting industry, I can confidently say that Nataly Lado possesses a rare blend of media savvy and strategic foresight... We saw a 25% increase in attendance over the previous year."</p>
+                    <cite>— Media Executive, Broadcasting Network</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="scroll-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <form id="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+                <div class="form-group form-group-names">
+                    <div>
+                        <label for="firstName" class="sr-only">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    </div>
+                    <div>
+                        <label for="lastName" class="sr-only">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="sr-only">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="sr-only">Your Message</label>
+                    <textarea id="message" name="message" rows="7" placeholder="Your Message or Inquiry" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> by Nataly Lado. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- NEW JAVASCRIPT ENHANCEMENTS ---
+
+        // 1. FADE-IN ANIMATION ON SCROLL
+        const faders = document.querySelectorAll('.fade-in-element');
+        const faderOptions = {
+            threshold: 0.4, // Trigger when 40% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Start animation a bit sooner
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, faderOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // 2. ACTIVE NAVIGATION HIGHLIGHTING ON SCROLL
+        const sections = document.querySelectorAll('.scroll-section');
+        const navLinks = document.querySelectorAll('#navbar a');
+
+        const navOptions = {
+            threshold: 0.5 // Trigger when 50% of the section is visible
+        };
+
+        const sectionObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, navOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+    </script>
+</body>
+</html>
